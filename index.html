@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Мини-калькулятор расходов</title>
+<link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  <div class="container" role="application" aria-labelledby="appTitle">
+    <header>
+
+        <h1 id="appTitle">Калькулятор расходов</h1>
+
+    </header>
+
+    <main class="left" aria-live="polite">
+      <form id="txForm" class="form" autocomplete="off" aria-label="Добавить транзакцию">
+        <input type="text" id="txName" placeholder="Название (напр. Зарплата / Кофе)" required />
+        <input type="number" step="0.01" id="txAmount" placeholder="Сумма" required />
+<div class="radio-group" role="radiogroup" aria-label="Тип транзакции">
+  <label class="radio">
+    <input type="radio" name="txType" value="income" checked>
+    <span>Доход</span>
+  </label>
+  <label class="radio">
+    <input type="radio" name="txType" value="expense">
+    <span>Расход</span>
+  </label>
+</div>
+        <button type="submit" class="btn">Добавить</button>
+      </form>
+
+      <section aria-labelledby="listTitle">
+        <h2 id="listTitle" >История транзакций</h2>
+        <div id="txList" class="tx-list" tabindex="0">
+          <!-- транзакции рендерятся сюда -->
+        </div>
+      </section>
+    </main>
+
+    <aside class="right" aria-label="Баланс и статистика">
+      <div class="balance" role="status" aria-live="polite">
+        <h2>Общий баланс</h2>
+        <p id="balanceValue">0 ₽</p>
+      </div>
+
+      <div class="row">
+        <div class="box small">
+          <div class="label">Доходы</div>
+          <div class="value" id="incomeValue">0 ₽</div>
+          <div class="small-muted">Сумма всех доходных транзакций</div>
+        </div>
+        <div class="box small">
+          <div class="label">Расходы</div>
+          <div class="value" id="expenseValue">0 ₽</div>
+          <div class="small-muted">Сумма всех расходных транзакций</div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="clearAll" class="btn">Очистить все</button>
+        <button id="exportBtn" class="btn" >Экспорт JSON</button>
+      </div>
+
+    </aside>
+  </div>
+
+<script src="js/index.js"></script>
+</body>
+</html>
