@@ -1,0 +1,280 @@
+/* === Основные переменные цветов и шрифтов === */
+:root{
+  --bg:#f3f6fa;                 /* фон страницы */
+  --card:#ffffff;               /* фон карточек */
+  --text:#1e293b;               /* основной цвет текста */
+  --muted:#64748b;              /* приглушённый текст */
+  --accent:#53bee9;             /* акцент (синий) */
+  --income:#22c55e;             /* зелёный для доходов */
+  --expense:#ef4444;            /* красный для расходов */
+  --violet: #ecddf2;            /* фиолетовый */
+  --shadow: 0 6px 18px rgba(0,0,0,0.06); /* тень */
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* === Сброс и базовые стили === */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:28px;
+  color:var(--text);
+}
+
+/* === Контейнер всего приложения === */
+.container{
+  width:100%;
+  max-width:1000px;
+  background:var(--card);
+  border-radius:16px;
+  padding:28px;
+  box-shadow:var(--shadow);
+  display:grid;
+  grid-template-columns: 1fr 350px;
+  gap:24px;
+}
+
+/* === Шапка === */
+header{
+  grid-column:1 / -1;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+header h1{
+  margin:0;
+  font-size:22px;
+  font-weight:700;
+}
+header p{
+  margin:2px 0 0;
+  color:var(--muted);
+  font-size:14px;
+}
+
+/* === Левая колонка (форма + список) === */
+.left{
+  padding:10px 0;
+}
+
+/* Форма добавления транзакции */
+.form{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+.form input[type="text"],
+.form input[type="number"],
+.form select{
+  padding:10px 14px;
+  border-radius:10px;
+  border:1px solid #e2e8f0;
+  background:white;
+  font-size:14px;
+  transition: all .2s ease;
+}
+.form input:focus,
+.form select:focus{
+  border-color:var(--accent);
+  box-shadow:0 0 0 2px rgba(59,130,246,0.2);
+}
+
+/* Кнопка */
+.btn{
+  background:var(--accent);
+  color:white;
+  border:none;
+  padding:10px 16px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+  transition:background .2s, transform .1s;
+}
+.btn:hover{background:#2563eb;}
+.btn:active{transform:scale(0.97);}
+
+/* === Список транзакций === */
+.tx-list{
+  background:#f9fafb;
+  border:1px solid #e2e8f0;
+  border-radius:12px;
+  padding:12px;
+  max-height:420px;
+  overflow:auto;
+}
+.tx{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 12px;
+  border-radius:10px;
+  background:white;
+  margin-bottom:10px;
+  box-shadow:0 2px 6px rgba(0,0,0,0.04);
+  transition:transform .15s;
+}
+.tx:hover{transform:translateY(-2px);}
+.tx:last-child{margin-bottom:0}
+
+/* Информация слева */
+.tx .meta{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.tx .dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+}
+.tx .title{font-weight:600}
+.tx .date{font-size:12px;color:var(--muted);}
+
+/* Сумма и кнопка удаления */
+.amount{
+  font-weight:700;
+  min-width:120px;
+  text-align:right;
+}
+.amount.income{color:var(--income);}
+.amount.expense{color:var(--expense);}
+.tx button.delete{
+  margin-left:12px;
+  border-radius:8px;
+  padding:6px 8px;
+  border:1px solid #e2e8f0;
+  background:#f8fafc;
+  cursor:pointer;
+  font-size:12px;
+  transition:background .2s;
+}
+.tx button.delete:hover{background:#fee2e2;}
+
+/* === Правая колонка (баланс + статистика) === */
+.right{
+  padding:20px;
+  background:#f7f9fa;
+  border-radius:14px;
+  border:1px solid #e2e8f0;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+/* Блок общего баланса */
+.balance{
+  text-align:center;
+  padding:14px;
+  border-radius:12px;
+  background:linear-gradient(90deg, rgba(48, 65, 255, 0.09), rgba(34, 136, 231, 0.05));
+}
+.balance h2{margin:0;font-size:18px}
+.balance p{margin:6px 0 0;font-size:22px;font-weight:700}
+
+/* Карточки доход/расход */
+.row{display:flex;gap:12px;}
+.box{
+  flex:1;
+  padding:14px;
+  border-radius:12px;
+  background:white;
+  border:1px solid #e2e8f0;
+}
+.box .label{font-size:13px;color:var(--muted)}
+.box .value{font-weight:800;font-size:18px}
+
+/* Кнопки управления */
+.controls{
+  margin-top:4px;
+  display:flex;
+  gap:10px;
+}
+.controls .btn{flex:1}
+
+/* Подписи */
+.small-muted{font-size:13px;color:var(--muted)}
+
+/* Состояние пустого списка */
+.empty{
+  text-align:center;
+  color:var(--muted);
+  padding:20px;
+  border-radius:10px;
+  background:#f1f5f9;
+}
+
+/* === Радио-кнопки (Доход/Расход) === */
+.radio-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.radio {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.radio:hover input[type="radio"] + span {
+  border-color: var(--accent);
+  background: #f0f9ff;
+  
+}
+
+/* Скрываем стандартный radio */
+.radio input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+/*  radio */
+.radio input[type="radio"] + span {
+  font-weight: 600;
+  color: #000000;
+  background: #ffffff;
+  padding: 10px 20px;
+  border-radius: 6px;
+  
+}
+/* Состояние активного radio */
+.radio input[type="radio"]:checked + span {
+  font-weight: 600;
+  color: white;
+  background: #6dcbf0; 
+  
+  border-radius: 6px;
+}
+#listTitle{
+    font-size:14px;
+    margin:0 0 8px 0;
+    color:var(--muted);
+}
+#clearAll{
+background:#fa6565;
+}
+#exportBtn{
+background:#1fd196;
+}
+
+/* === Адаптив для телефонов === */
+@media (max-width:900px){
+  .container{grid-template-columns:1fr; padding:20px}
+  .right{order:3}
+  header{flex-direction:column; align-items:flex-start; gap:6px}
+}
